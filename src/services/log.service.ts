@@ -1,6 +1,5 @@
-import { Logger, createLogger, format, transports } from 'winston';
-
 import { Injectable } from '@nestjs/common';
+import { Logger, createLogger, format, transports } from 'winston';
 
 export type LevelLog = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
 

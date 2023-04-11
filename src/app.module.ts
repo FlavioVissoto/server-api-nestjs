@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import { UserModule } from './controllers';
 
 @Module({
   imports: [
@@ -17,6 +17,9 @@ import { UserModule } from './user/user.module';
       database: process.env.DATABASE_DATABASE,
       password: process.env.DATABASE_PASSWORD,
       port: Number(process.env.DATABASE_PORT),
+      entities: [`${__dirname}/**/*.entity{*.js,*.ts}`],
+      migrations: [`${__dirname}/database/migrations/{*.js,*.ts}`],
+      migrationsRun: true,
       ssl: {
         rejectUnauthorized: false,
       },
