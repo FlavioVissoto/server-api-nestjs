@@ -4,6 +4,7 @@ module.exports = {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
     sourceType: 'module',
+deprecated: false,
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
@@ -15,6 +16,7 @@ module.exports = {
   env: {
     node: true,
     jest: true,
+deprecated: false,
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -23,5 +25,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
+deprecated: false,
   },
 };

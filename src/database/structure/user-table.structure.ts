@@ -1,4 +1,4 @@
-import { ColumnOptions } from 'typeorm';
+import { ColumnOptions, PrimaryColumnOptions } from 'typeorm';
 
 export const UserTableStructure = {
   tablename: 'TB_USER',
@@ -7,10 +7,10 @@ export const UserTableStructure = {
       name: 'id',
       primary: true,
       generated: 'uuid',
-      unique: true,
       nullable: false,
+      unique: true,
       type: 'uuid',
-    } as ColumnOptions,
+    } as PrimaryColumnOptions,
     name: {
       name: 'name',
       nullable: false,
@@ -25,7 +25,7 @@ export const UserTableStructure = {
     cpf: {
       name: 'cpf',
       nullable: false,
-      type: 'integer',
+      type: 'bigint',
     } as ColumnOptions,
     typeUser: {
       name: 'typeUser',
@@ -54,5 +54,6 @@ export const UserTableStructure = {
       type: 'timestamp without time zone',
       default: 'now()',
     } as ColumnOptions,
+    deprecated: false,
   },
 } as const;

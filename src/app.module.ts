@@ -1,3 +1,5 @@
+import { classes } from '@automapper/classes';
+import { AutomapperModule } from '@automapper/nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +9,7 @@ import { UserModule } from './controllers';
 
 @Module({
   imports: [
+    UserModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
@@ -24,7 +27,9 @@ import { UserModule } from './controllers';
         rejectUnauthorized: false,
       },
     }),
-    UserModule,
+    AutomapperModule.forRoot({
+      strategyInitializer: classes(),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

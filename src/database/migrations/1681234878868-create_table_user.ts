@@ -1,4 +1,5 @@
 import { ColumnOptions, MigrationInterface, QueryRunner, Table, TableColumn } from 'typeorm';
+
 import { UserTableStructure } from './../structure/user-table.structure';
 
 export class CreateTableUser1681234878868 implements MigrationInterface {
