@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './controllers';
+import { CacheInMemoryAppModule } from './modules/cache/cache-memory-app.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UserModule } from './controllers';
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
+    CacheInMemoryAppModule,
   ],
   controllers: [AppController],
   providers: [AppService],

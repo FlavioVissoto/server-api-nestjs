@@ -15,6 +15,9 @@ export declare global {
 
       JWT_SECRET: string;
       JWT_EXPIRES_TIME: string;
+
+      CACHE_MEMORY_TTL_MS: string;
+      CACHE_MEMORY_TTL_MIN: string;
     }
   }
 }
