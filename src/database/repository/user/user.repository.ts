@@ -34,10 +34,7 @@ export class UserRepository {
           email: email,
         },
       });
-      if (result) {
-        return result;
-      }
-      return new Error(`Registro não encontrado para o e-mail: ${email}`);
+      return result;
     } catch (err: unknown) {
       if (err instanceof Error) {
         this.logService.writeError({

@@ -65,7 +65,8 @@ export class UserService {
 
   async create(user: CreateUserRequest): Promise<UserResponse | Error> {
     try {
-      const validateEmail = this.userRepository.getByEmail(user.email);
+      const validateEmail = await this.userRepository.getByEmail(user.email);
+
       if (validateEmail instanceof Error || validateEmail != undefined) {
         return new BadRequestException(HTTP.USER.CREATE_DUPLICATE_EMAIL);
       }

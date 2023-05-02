@@ -8,8 +8,7 @@ export const StatusCodes = {
   },
   BAD_GATEWAY: {
     status: 502,
-    message:
-      'This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.',
+    message: 'This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
     deprecated: false,
   },
@@ -27,15 +26,13 @@ export const StatusCodes = {
   },
   CONTINUE: {
     status: 100,
-    message:
-      'This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.',
+    message: 'This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.2.1',
     deprecated: false,
   },
   CREATED: {
     status: 201,
-    message:
-      'The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.',
+    message: 'The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.3.2',
     deprecated: false,
   },
@@ -79,8 +76,7 @@ export const StatusCodes = {
   },
   IM_A_TEAPOT: {
     status: 418,
-    message:
-      'Any attempt to brew coffee with a teapot should result in the error code "418 I\'m a teapot". The resulting entity body MAY be short and stout.',
+    message: 'Any attempt to brew coffee with a teapot should result in the error code "418 I\'m a teapot". The resulting entity body MAY be short and stout.',
     doc: 'https://tools.ietf.org/html/rfc2324#section-2.3.2',
     deprecated: false,
   },
@@ -144,15 +140,13 @@ export const StatusCodes = {
   },
   MULTI_STATUS: {
     status: 207,
-    message:
-      'A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.',
+    message: 'A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.',
     doc: 'https://tools.ietf.org/html/rfc2518#section-10.2',
     deprecated: false,
   },
   MULTIPLE_CHOICES: {
     status: 300,
-    message:
-      'The request has more than one possible responses. User-agent or user should choose one of them. There is no standardized way to choose one of the responses.',
+    message: 'The request has more than one possible responses. User-agent or user should choose one of them. There is no standardized way to choose one of the responses.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.4.1',
     deprecated: false,
   },
@@ -164,8 +158,7 @@ export const StatusCodes = {
   },
   NO_CONTENT: {
     status: 204,
-    message:
-      'There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.',
+    message: 'There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.3.5',
     deprecated: false,
   },
@@ -197,8 +190,7 @@ export const StatusCodes = {
   },
   NOT_MODIFIED: {
     status: 304,
-    message:
-      'This is used for caching purposes. It is telling to client that response has not been modified. So, client can continue to use same cached version of response.',
+    message: 'This is used for caching purposes. It is telling to client that response has not been modified. So, client can continue to use same cached version of response.',
     doc: 'https://tools.ietf.org/html/rfc7232#section-4.1',
     deprecated: false,
   },
@@ -216,8 +208,7 @@ export const StatusCodes = {
   },
   PAYMENT_REQUIRED: {
     status: 402,
-    message:
-      'This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.',
+    message: 'This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.5.2',
     deprecated: false,
   },
@@ -266,8 +257,7 @@ export const StatusCodes = {
   },
   REQUEST_TOO_LONG: {
     status: 413,
-    message:
-      'Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.',
+    message: 'Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.5.11',
     deprecated: false,
   },
@@ -279,8 +269,7 @@ export const StatusCodes = {
   },
   REQUESTED_RANGE_NOT_SATISFIABLE: {
     status: 416,
-    message:
-      "The range specified by the Range header field in the request can't be fulfilled; it's possible that the range is outside the size of the target URI's data.",
+    message: "The range specified by the Range header field in the request can't be fulfilled; it's possible that the range is outside the size of the target URI's data.",
     doc: 'https://tools.ietf.org/html/rfc7233#section-4.4',
     deprecated: false,
   },
@@ -304,15 +293,13 @@ export const StatusCodes = {
   },
   SWITCHING_PROTOCOLS: {
     status: 101,
-    message:
-      'This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching too.',
+    message: 'This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching too.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.2.2',
     deprecated: false,
   },
   TEMPORARY_REDIRECT: {
     status: 307,
-    message:
-      'Server sent this response to directing client to get requested resource to another URI with same method that used prior request.',
+    message: 'Server sent this response to directing client to get requested resource to another URI with same method that used prior request.',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.4.7',
     deprecated: false,
   },
@@ -348,8 +335,7 @@ export const StatusCodes = {
   },
   USE_PROXY: {
     status: 305,
-    message:
-      'Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy',
+    message: 'Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy',
     doc: 'https://tools.ietf.org/html/rfc7231#section-6.4.6',
     deprecated: true,
   },
@@ -360,10 +346,10 @@ export const StatusCodes = {
     doc: 'https://datatracker.ietf.org/doc/html/rfc7540#section-9.1.2',
     deprecated: false,
   },
-};
+} as const;
 
 export interface ErrorResponse {
-  status: number;
+  statusCode: number;
   message: string;
   detail: string;
 }
@@ -374,7 +360,7 @@ export class ErrorService extends Error {
   constructor(error: { status: number; message: string }, detail: string = undefined, ...args: string[]) {
     super(...args);
     if (error) {
-      this.response = { status: error.status, message: error.message, detail: detail };
+      this.response = { statusCode: error.status, message: error.message, detail: detail };
     }
   }
 }

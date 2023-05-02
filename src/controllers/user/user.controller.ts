@@ -15,13 +15,13 @@ export class UserController {
 
       if (result instanceof Error) {
         const err = new ErrorService(StatusCodes.INTERNAL_SERVER_ERROR);
-        return res.status(err.response.status).json(err.response);
+        return res.status(err.response.statusCode).json(err.response);
       }
 
       return res.status(StatusCodes.OK.status).json({ data: result });
     } catch (error: unknown) {
       const err = new ErrorService(StatusCodes.INTERNAL_SERVER_ERROR, (error as Error).message);
-      return res.status(err.response.status).json(err.response);
+      return res.status(err.response.statusCode).json(err.response);
     }
   }
 
@@ -31,12 +31,12 @@ export class UserController {
       const result = await this.userService.create(params);
       if (result instanceof BadRequestException) {
         const error = new ErrorService(StatusCodes.BAD_REQUEST, result.message);
-        return res.status(error.response.status).json(error.response);
+        return res.status(error.response.statusCode).json(error.response);
       }
-      return res.status(StatusCodes.OK.status).json(result);
+      return res.status(StatusCodes.CREATED.status).json(result);
     } catch (error: unknown) {
       const err = new ErrorService(StatusCodes.INTERNAL_SERVER_ERROR, (error as Error).message);
-      return res.status(err.response.status).json(err.response);
+      return res.status(err.response.statusCode).json(err.response);
     }
   }
 }

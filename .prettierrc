@@ -7,7 +7,7 @@
   "arrowParens": "always",
   "trailingComma": "es5",
   "bracketSameLine": true,
-  "printWidth": 140,
+  "printWidth": 180,
   "endOfLine": "auto",
-  "code": 140
+  "code": 180
 }

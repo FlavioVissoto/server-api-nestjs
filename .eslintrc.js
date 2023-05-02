@@ -4,19 +4,19 @@ module.exports = {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
     sourceType: 'module',
-deprecated: false,
+    deprecated: false,
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'prettier'
+    'prettier',
   ],
   root: true,
   env: {
     node: true,
     jest: true,
-deprecated: false,
+    deprecated: false,
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -25,6 +25,6 @@ deprecated: false,
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
-deprecated: false,
+    deprecated: false,
   },
 };
