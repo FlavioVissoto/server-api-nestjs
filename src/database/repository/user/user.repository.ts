@@ -27,7 +27,7 @@ export class UserRepository {
     }
   }
 
-  public async getByEmail(email: string): Promise<UserEntity | Error> {
+  public async getByEmail(email: string): Promise<UserEntity> {
     try {
       const result = await this.userRepository.findOne({
         where: {
@@ -45,7 +45,7 @@ export class UserRepository {
           stack: err.stack,
         });
       }
-      return new Error('Erro ao consultar registro.');
+      throw new Error('Erro ao consultar registro.');
     }
   }
 

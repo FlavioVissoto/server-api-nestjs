@@ -1,25 +1,15 @@
 import * as jwt from 'jsonwebtoken';
 
+import { JWTData, JWTToken } from '../interfaces';
+
+import { InternalServerErrorException } from '@nestjs/common';
 import { JWT } from '../constants';
 import { LogService } from './log.service';
-
-interface JWTToken {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
-  refresh_token?: string;
-  scope?: string;
-}
-
-interface JWTData {
-  uid: number;
-  email: string;
-}
 
 export class JWTService {
   constructor(private logService: LogService) {}
 
-  public sign(data: JWTData): JWTToken | 'JWT_SECRET_NOT_FOUND' | 'JWT_EXPIRES_TIME_FOUND' {
+  public sign(data: JWTData): JWTToken {
     if (!process.env.JWT_SECRET) {
       this.logService.writeError({
         file: __dirname,
@@ -27,7 +17,7 @@ export class JWTService {
         method: 'sign',
         name: 'JWT_SERVICE',
       });
-      return JWT.JWT_SECRET_NOT_FOUND;
+      throw new InternalServerErrorException(null, JWT.JWT_SECRET_NOT_FOUND);
     }
 
     if (!process.env.JWT_EXPIRES_TIME) {
@@ -37,7 +27,7 @@ export class JWTService {
         method: 'sign',
         name: 'JWT_SERVICE',
       });
-      return JWT.JWT_EXPIRES_TIME_FOUND;
+      throw new InternalServerErrorException(null, JWT.JWT_EXPIRES_TIME_FOUND);
     }
 
     const token = jwt.sign(data, process.env.JWT_SECRET, {
@@ -48,8 +38,8 @@ export class JWTService {
     return {
       access_token: token,
       expires_in: Number(process.env.JWT_EXPIRES_TIME),
-      // refresh_token: undefined,
-      // scope: undefined,
+      refresh_token: undefined,
+      scope: undefined,
       token_type: 'Bearer',
     } as JWTToken;
   }
