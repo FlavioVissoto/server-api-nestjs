@@ -1,35 +1,21 @@
 import * as jwt from 'jsonwebtoken';
 
+import { ForbiddenException, InternalServerErrorException } from '@nestjs/common';
+import { HTTP_PTBR, JWT } from '../constants';
 import { JWTData, JWTToken } from '../interfaces';
 
-import { InternalServerErrorException } from '@nestjs/common';
-import { JWT } from '../constants';
-import { LogService } from './log.service';
-
 export class JWTService {
-  constructor(private logService: LogService) {}
-
-  public sign(data: JWTData): JWTToken {
+  constructor() {
     if (!process.env.JWT_SECRET) {
-      this.logService.writeError({
-        file: __dirname,
-        message: JWT.JWT_SECRET_NOT_FOUND,
-        method: 'sign',
-        name: 'JWT_SERVICE',
-      });
       throw new InternalServerErrorException(null, JWT.JWT_SECRET_NOT_FOUND);
     }
 
     if (!process.env.JWT_EXPIRES_TIME) {
-      this.logService.writeError({
-        file: __dirname,
-        message: JWT.JWT_EXPIRES_TIME_FOUND,
-        method: 'sign',
-        name: 'JWT_SERVICE',
-      });
       throw new InternalServerErrorException(null, JWT.JWT_EXPIRES_TIME_FOUND);
     }
+  }
 
+  public sign(data: JWTData): JWTToken {
     const token = jwt.sign(data, process.env.JWT_SECRET, {
       algorithm: 'HS256',
       expiresIn: Number(process.env.JWT_EXPIRES_TIME),
@@ -44,31 +30,18 @@ export class JWTService {
     } as JWTToken;
   }
 
-  public verify(token: string): JWTData | 'JWT_SECRET_NOT_FOUND' | 'JWT_INVALID_TOKEN' {
-    if (!process.env.JWT_SECRET) {
-      this.logService.writeError({
-        file: __dirname,
-        message: JWT.JWT_SECRET_NOT_FOUND,
-        method: 'verify',
-        name: 'JWT_SERVICE',
-      });
-      return JWT.JWT_SECRET_NOT_FOUND;
-    }
-
+  public verify(token: string): JWTData {
     try {
       const decoded: jwt.JwtPayload | string = jwt.verify(token, process.env.JWT_SECRET);
-      if (decoded === 'string') {
-        return JWT.JWT_INVALID_TOKEN;
-      }
       return decoded as JWTData;
     } catch (err) {
-      this.logService.writeError({
-        file: __dirname,
-        message: JWT.JWT_INVALID_TOKEN,
-        method: 'verify',
-        name: 'JWT_SERVICE',
-      });
-      return JWT.JWT_INVALID_TOKEN;
+      if (err instanceof jwt.TokenExpiredError) {
+        throw new ForbiddenException(HTTP_PTBR.TOKEN_EXPIRED);
+      }
+      if (err instanceof jwt.JsonWebTokenError) {
+        throw new ForbiddenException(null, HTTP_PTBR.TOKEN_INVALID_FORMAT);
+      }
+      throw new ForbiddenException(JWT.JWT_INVALID_TOKEN);
     }
   }
 }

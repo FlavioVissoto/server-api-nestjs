@@ -1,3 +1,5 @@
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+
 import { classes } from '@automapper/classes';
 import { AutomapperModule } from '@automapper/nestjs';
 import { Module } from '@nestjs/common';
@@ -6,7 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './controllers';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { JWTGuard } from './guards';
 import { CacheInMemoryAppModule } from './modules/cache/cache-memory-app.module';
+import { JWTService } from './services';
 
 @Module({
   imports: [
@@ -34,6 +39,17 @@ import { CacheInMemoryAppModule } from './modules/cache/cache-memory-app.module'
     CacheInMemoryAppModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    JWTService,
+    {
+      provide: APP_GUARD,
+      useClass: JWTGuard,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

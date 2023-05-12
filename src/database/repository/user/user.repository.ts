@@ -8,7 +8,7 @@ import { UserEntity } from '../../entities';
 export class UserRepository {
   constructor(private logService: LogService, @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>) {}
 
-  public async GetAll(): Promise<UserEntity[] | Error> {
+  public async GetAll(): Promise<UserEntity[]> {
     try {
       return this.userRepository.find();
     } catch (err: unknown) {
@@ -20,10 +20,8 @@ export class UserRepository {
           name: err.name,
           stack: err.stack,
         });
-
-        console.log(err);
       }
-      return new Error('Erro ao consultar registro.');
+      throw new Error('Erro ao consultar registro.');
     }
   }
 

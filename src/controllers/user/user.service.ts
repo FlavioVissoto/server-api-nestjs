@@ -21,12 +21,9 @@ export class UserService {
     @InjectMapper() private readonly mapper: Mapper
   ) {}
 
-  async getAll(): Promise<UserResponse[] | Error> {
+  async getAll(): Promise<UserResponse[]> {
     try {
       const result = await this.userRepository.GetAll();
-      if (result instanceof Error) {
-        throw new Error('Erro ao consultar usuários.');
-      }
       return this.mapper.mapArray(result, UserEntity, UserResponse);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -37,8 +34,6 @@ export class UserService {
           name: err.name,
           stack: err.stack,
         });
-
-        console.log(err);
       }
       throw new Error('Erro ao consultar registro.');
     }
@@ -62,33 +57,21 @@ export class UserService {
     }
   }
 
-  async create(user: CreateUserRequest): Promise<UserResponse | Error> {
-    try {
-      const validateEmail = await this.userRepository.getByEmail(user.email);
+  async create(user: CreateUserRequest): Promise<UserResponse> {
+    const validateEmail = await this.userRepository.getByEmail(user.email);
 
-      if (validateEmail instanceof Error || validateEmail != undefined) {
-        return new BadRequestException(HTTP_PTBR.USER.CREATE_DUPLICATE_EMAIL);
-      }
-
-      user.pass = await this.cryptoService.hash(user.pass);
-
-      const entity = this.mapper.map(user, CreateUserRequest, UserEntity);
-      entity.id = uuid();
-      const result = await this.userRepository.create(entity);
-
-      return this.mapper.map(result, UserEntity, UserResponse);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        this.logService.writeError({
-          method: 'create',
-          file: __dirname,
-          message: err.message,
-          name: err.name,
-          stack: err.stack,
-        });
-      }
-      throw new Error('Erro ao criar usuário.');
+    if (validateEmail) {
+      console.log(validateEmail);
+      throw new BadRequestException(HTTP_PTBR.USER.CREATE_DUPLICATE_EMAIL);
     }
+
+    user.pass = await this.cryptoService.hash(user.pass);
+
+    const entity = this.mapper.map(user, CreateUserRequest, UserEntity);
+    entity.id = uuid();
+    const result = await this.userRepository.create(entity);
+
+    return this.mapper.map(result, UserEntity, UserResponse);
   }
 
   async signIn(params: SignInUserRequest): Promise<JWTToken> {
