@@ -4,4 +4,5 @@ export interface JWTToken {
   expires_in: number;
   refresh_token?: string;
   scope?: string;
+  type_user: number;
 }

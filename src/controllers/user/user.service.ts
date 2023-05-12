@@ -101,6 +101,7 @@ export class UserService {
     return this.jwtService.sign({
       email: result.email,
       uid: result.id,
+      typeUser: result.typeUser,
     } as JWTData);
   }
 }
