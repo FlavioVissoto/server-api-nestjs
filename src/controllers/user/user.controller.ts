@@ -30,7 +30,7 @@ export class UserController {
   @Post('signin')
   @AllowAnonymous()
   @HttpCode(200)
-  async signIn(@Body() params: SignInUserRequest, @Res({ passthrough: true }) response: Response): Promise<ResponseData<JWTToken>> {
+  async signIn(@Body() params: SignInUserRequest): Promise<ResponseData<JWTToken>> {
     const result = await this.userService.signIn(params);
 
     return {
