@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { CreateUserRequest, SignInUserRequest } from '../../contracts/request/user';
 import { ResponseData } from '../../contracts/response';
 import { UserResponse } from '../../contracts/response/user';
@@ -20,6 +20,7 @@ export class UserController {
   }
 
   @Post('create')
+  @AllowAnonymous()
   async create(@Body() params: CreateUserRequest): Promise<ResponseData<UserResponse>> {
     const result = await this.userService.create(params);
     return {
