@@ -14,6 +14,10 @@ export class UserEntity {
   name: string;
 
   @AutoMap()
+  @Column(UserTableStructure.columns.lastname)
+  lastname: string;
+
+  @AutoMap()
   @Column(UserTableStructure.columns.email)
   email: string;
 

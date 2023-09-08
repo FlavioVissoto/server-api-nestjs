@@ -8,6 +8,10 @@ export class CreateUserRequest {
   name: string;
 
   @AutoMap()
+  @IsString()
+  lastname: string;
+
+  @AutoMap()
   @IsNotEmpty()
   @IsEmail()
   email: string;

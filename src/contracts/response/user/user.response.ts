@@ -8,6 +8,9 @@ export class UserResponse {
   name: string;
 
   @AutoMap()
+  lastname: string;
+
+  @AutoMap()
   email: string;
 
   @AutoMap()

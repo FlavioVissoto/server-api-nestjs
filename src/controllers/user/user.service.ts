@@ -61,7 +61,6 @@ export class UserService {
     const validateEmail = await this.userRepository.getByEmail(user.email);
 
     if (validateEmail) {
-      console.log(validateEmail);
       throw new BadRequestException(HTTP_PTBR.USER.CREATE_DUPLICATE_EMAIL);
     }
 
