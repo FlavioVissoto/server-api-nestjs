@@ -16,6 +16,11 @@ export const UserTableStructure = {
       nullable: false,
       type: 'character varying',
     } as ColumnOptions,
+    lastname: {
+      name: 'lastname',
+      nullable: false,
+      type: 'character varying',
+    } as ColumnOptions,
     email: {
       name: 'email',
       nullable: false,
