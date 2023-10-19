@@ -1,0 +1,61 @@
+version: '3.8'
+
+networks:
+  backend:
+    external: true
+
+services:
+  db-postgres:
+    image: postgres
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: vissoto123
+      POSTGRES_USER: vissoto
+      POSTGRES_DB: vissoto_db
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+    networks:
+      - backend
+  db-pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: vissoto@email.com
+      PGADMIN_DEFAULT_PASSWORD: vissoto123
+    volumes:
+      - ./pgadmin/data:/var/lib/postgresql/data
+    ports:
+      - '15432:80'
+    networks:
+      - backend
+  api-node:
+    build:
+      context: ./api
+      dockerfile: dockerfile
+    volumes:
+      - ./api/src:/usr/node/app/src
+    container_name: api-node-container
+    ports:
+      - '3000:3000'
+    networks:
+      - backend
+    environment:
+      NODE_ENV: dev
+      PORT: 3000
+      JWT_SECRET: 4?Rt*2N*65ThF@3vW_sRQfsq35vd&Q%t
+      JWT_EXPIRES_TIME: 1800
+      DATABASE_HOST: postgres-container
+      DATABASE_USER: vissoto
+      DATABASE_SCHEMA: public
+      DATABASE_DATABASE: vissoto_db
+      DATABASE_PASSWORD: vissoto123
+      DATABASE_PORT: 5432
+      CACHE_MEMORY_TTL_MS: 3600000
+      CACHE_MEMORY_TTL_MIN: 60
+    depends_on:
+      - db-postgres
+    command: npm start

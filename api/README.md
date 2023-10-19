@@ -1,21 +1,3 @@
-Executar os comandos abaixo para criar as imagens:
-
-docker build -t postgres-image -f postgres/dockerfile .
-
-docker build -t pgadmin-image -f pgadmin/dockerfile .
-
-Executar os comandos abaixo para executar as imagens:
-
-docker run -d --name pgadmin-container --network=bridge -p 15432:80 pgadmin-image
-
-docker run -d --rm --name postgres-container --network=bridge -p 5433:5432 -v "F:/Desenvolvimento/GIT/Docker/postgres/data:/var/lib/postgresql/data" postgres-image
-
-Parar container:
-
-`docker stop postgres-container`
-
-docker-compose up -d
-
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>

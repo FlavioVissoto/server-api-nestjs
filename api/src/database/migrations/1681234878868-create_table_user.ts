@@ -18,7 +18,6 @@ export class CreateTableUser1681234878868 implements MigrationInterface {
         } as TableColumn);
       }
     }
-
     const table: Table = new Table({
       schema: process.env.DATABASE_SCHEMA,
       database: process.env.DATABASE_DATABASE,
@@ -31,7 +30,12 @@ export class CreateTableUser1681234878868 implements MigrationInterface {
       ],
     });
 
-    await queryRunner.createTable(table, true, true, true);
+    console.log(table);
+    try {
+      await queryRunner.createTable(table, true, true, true);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

@@ -1,0 +1,4 @@
+FROM postgres
+ENV POSTGRES_PASSWORD vissoto123
+ENV POSTGRES_USER vissoto
+ENV POSTGRES_DB vissoto_db

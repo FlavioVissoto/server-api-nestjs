@@ -18,7 +18,7 @@ export const UserTableStructure = {
     } as ColumnOptions,
     lastname: {
       name: 'lastname',
-      nullable: false,
+      nullable: true,
       type: 'character varying',
     } as ColumnOptions,
     email: {
@@ -59,6 +59,5 @@ export const UserTableStructure = {
       type: 'timestamp without time zone',
       default: 'now()',
     } as ColumnOptions,
-    deprecated: false,
   },
 } as const;

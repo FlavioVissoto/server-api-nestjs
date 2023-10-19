@@ -29,9 +29,11 @@ import { JWTService } from './services';
       entities: [`${__dirname}/**/*.entity{*.js,*.ts}`],
       migrations: [`${__dirname}/database/migrations/{*.js,*.ts}`],
       migrationsRun: true,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      synchronize: true,
+      ssl: false,
+      // ssl: {
+      //   rejectUnauthorized: true,
+      // },
     }),
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
