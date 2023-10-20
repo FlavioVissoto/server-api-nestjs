@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
-import { CreateUserRequest, SignInUserRequest } from '../../contracts/request/user';
+import { CreateUserRequest, SignInUserRequest, TokenUserRequest } from '../../contracts/request/user';
 import { ResponseData } from '../../contracts/response';
 import { UserResponse } from '../../contracts/response/user';
 import { AllowAnonymous } from '../../decorators';
@@ -36,6 +36,15 @@ export class UserController {
 
     return {
       data: result,
+    };
+  }
+
+  @Post('validatetoken')
+  @AllowAnonymous()
+  @HttpCode(200)
+  validateToken(@Body() params: TokenUserRequest): ResponseData<boolean> {
+    return {
+      data: this.userService.validateToken(params),
     };
   }
 }

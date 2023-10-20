@@ -5,7 +5,7 @@ import { InjectMapper } from '@automapper/nestjs';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { HTTP_PTBR } from '../../constants/http/http-response.constants.ptbr';
-import { CreateUserRequest, SignInUserRequest } from '../../contracts/request/user';
+import { CreateUserRequest, SignInUserRequest, TokenUserRequest } from '../../contracts/request/user';
 import { UserResponse } from '../../contracts/response/user';
 import { UserEntity } from '../../database/entities';
 import { UserRepository } from '../../database/repository';
@@ -85,5 +85,15 @@ export class UserService {
       uid: result.id,
       typeUser: result.typeUser,
     } as JWTData);
+  }
+
+  validateToken(token: TokenUserRequest): boolean {
+    try {
+      const g = this.jwtService.verify(token.token);
+      console.log(g);
+      return true;
+    } catch (error) {
+      throw error;
+    }
   }
 }
